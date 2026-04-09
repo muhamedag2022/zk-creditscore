@@ -1,57 +1,158 @@
-# Sample Hardhat 3 Beta Project (`node:test` and `viem`)
+# 🔐 ZK-CreditScore
 
-This project showcases a Hardhat 3 Beta project using the native Node.js test runner (`node:test`) and the `viem` library for Ethereum interactions.
+> Privacy-First Decentralized Reputation Layer on HashKey Chain | 基于HashKey Chain의隐私优先去中心化声誉层
 
-To learn more about the Hardhat 3 Beta, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3 Beta](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+[![Live Demo](https://img.shields.io/badge/Live-Demo-7c3aed?style=for-the-badge)](https://zk-creditscore.vercel.app/)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repo-181717?style=for-the-badge&logo=github)](https://github.com/muhamedag2022/zk-creditscore)
+[![HashKey Chain](https://img.shields.io/badge/HashKey-Testnet-a855f7?style=for-the-badge)](https://testnet-explorer.hsk.xyz)
+[![ZK Proofs](https://img.shields.io/badge/ZK-Groth16-blue?style=for-the-badge)](https://docs.circom.io)
+[![SBT](https://img.shields.io/badge/Token-Soulbound-green?style=for-the-badge)](#)
 
-## Project Overview
+---
 
-This example project includes:
+## 🚨 The Problem
 
-- A simple Hardhat configuration file.
-- Foundry-compatible Solidity unit tests.
-- TypeScript integration tests using [`node:test`](nodejs.org/api/test.html), the new Node.js native test runner, and [`viem`](https://viem.sh/).
-- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
+In Web3 today, to access credit-based DeFi privileges:
+- Users must expose their **entire wallet history**.
+- Privacy is sacrificed for financial access.
+- No portable, verifiable reputation exists on HashKey Chain.
+- Institutions cannot verify user credibility without KYC leaks.
 
-## Usage
+## 💡 The Solution
 
-### Running Tests
+ZK-CreditScore builds the **first privacy-preserving reputation layer** on HashKey Chain.
+Users prove their creditworthiness using **Zero-Knowledge Proofs (zk-SNARKs)** — without revealing their actual score, transaction history, or wallet balance.
 
-To run all the tests in the project, execute the following command:
+> "Prove you're trustworthy. Reveal nothing."
 
-```shell
-npx hardhat test
+---
+
+## ✨ How It Works
+
+1. **User connects wallet** via RainbowKit.
+2. **Backend analyzes on-chain activity:**
+   - Wallet age & activity consistency.
+   - Transaction volume & asset diversity.
+   - DeFi protocol interactions on HashKey Chain.
+3. **ZK-Trust Index calculated (0-100)**.
+4. **Circom circuit generates Groth16 proof** *(entirely in browser — no data leaves device)*.
+5. **Groth16Verifier contract verifies proof** on HashKey Chain.
+6. **ReputationSBT minted** — a non-transferable Soulbound identity badge.
+7. **Elite Member status confirmed** on-chain.
+
+---
+
+## 🏗 Architecture
+
+```text
+┌─────────────────────────────────────────┐
+│           Frontend (Next.js 15)          │
+│  RainbowKit + Wagmi + Tailwind CSS       │
+│  Hosted on Vercel                        │
+└──────────────┬──────────────────────────┘
+               ↓
+┌─────────────────────────────────────────┐
+│        ZK Engine (Browser-side)          │
+│  Circom Circuit + SnarkJS Groth16        │
+│  .wasm + .zkey (static assets)           │
+│  Proof generated locally — zero leaks    │
+└──────────────┬──────────────────────────┘
+               ↓
+┌─────────────────────────────────────────┐
+│     HashKey Chain Testnet (Chain ID 133) │
+│                                          │
+│  Groth16Verifier.sol                     │
+│  ReputationSBT.sol                       │
+│  CreditScoreRegistry.sol                 │
+└─────────────────────────────────────────┘
 ```
 
-You can also selectively run the Solidity or `node:test` tests:
+---
 
-```shell
-npx hardhat test solidity
-npx hardhat test nodejs
+## 🔐 ZK Privacy Model
+
+The core innovation: **your score never leaves your browser.**
+
+| Process | Location | Privacy Status |
+| :--- | :--- | :--- |
+| Wallet Data Fetching | Backend API | Private |
+| Score Calculation | Server-side | Encrypted |
+| **ZK Proof Generation** | **Browser (Client)** | **Zero Leakage** |
+| Proof Verification | Smart Contract | Mathematical Verification |
+| SBT Minting | HashKey Chain | Public Identity / Private Score |
+
+---
+
+## 🏆 Credit Tiers & Badges
+
+| Score Range | Tier | SBT Badge |
+| :--- | :--- | :--- |
+| 80-100 | 🥇 Platinum | Elite Member |
+| 60-79 | 🥈 Gold | Trusted Member |
+| 40-59 | 🥉 Silver | Verified Member |
+| 20-39 | 🟤 Bronze | Basic Member |
+| 0-19 | ⚪ Unranked | Ineligible |
+
+---
+
+## 📦 Smart Contracts (HashKey Testnet)
+
+| Contract | Address | Status |
+| :--- | :--- | :--- |
+| **SBT Contract** | `0x37061d5e51b6b9c79b8f89058f9e9924503b4711` | ✅ Verified |
+| **CreditProofVerifier** | `0xf36280a13e156954ecea75b5816f897ed62015db` | ✅ Live |
+| **Registry** | `0x94fb752029c0f56e9bed978a369904cc9557a57a` | ✅ Live |
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** Next.js 15 (App Router) + Tailwind CSS.
+- **Wallet Connection:** RainbowKit + Wagmi + Viem.
+- **ZK Cryptography:** Circom + SnarkJS (Groth16).
+- **Smart Contracts:** Solidity 0.8.24 + OpenZeppelin.
+- **DevOps:** GitHub Actions + Vercel Deployment.
+
+---
+
+## 🚀 Quick Start (Local Development)
+
+### Prerequisites
+- Node.js 18+
+- MetaMask with HashKey Testnet (Chain ID: 133).
+- HSK Testnet tokens from [faucet.hsk.xyz](https://faucet.hsk.xyz).
+
+### Installation
+```bash
+git clone [https://github.com/muhamedag2022/zk-creditscore.git](https://github.com/muhamedag2022/zk-creditscore.git)
+cd zk-creditscore/frontend
+npm install
 ```
 
-### Make a deployment to Sepolia
-
-This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
-
-To run the deployment to a local chain:
-
-```shell
-npx hardhat ignition deploy ignition/modules/Counter.ts
+### Run
+```bash
+npm run dev
+# Open http://localhost:3000
 ```
 
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
+---
 
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
+## 🎯 Hackathon Tracks
+- **Primary:** **ZKID** — Privacy-preserving identity infrastructure using real ZK-SNARKs.
+- **Secondary:** **DeFi** — On-chain reputation for credit-based lending.
+- **Bonus:** **AI** — Behavior-based wallet scoring algorithm.
 
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
+---
 
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
-```
+## 🌐 Project Links
+- **GitHub:** [muhamedag2022/zk-creditscore](https://github.com/muhamedag2022/zk-creditscore)
+- **Live dApp:** [zk-creditscore.vercel.app](https://zk-creditscore.vercel.app/)
 
-After setting the variable, you can run the deployment with the Sepolia network:
+<br/>
 
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
+<div align="center">
+  <strong>Built for HashKey Chain Horizon Hackathon 2026</strong>
+  <br/>
+  <em>"Securing Web3 Reputation with Mathematical Certainty"</em>
+</div>
 ```
