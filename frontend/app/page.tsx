@@ -10,7 +10,7 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [scoreData, setScoreData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const [hasBadge, setHasBadge] = useState(false); // حالة ملكية البادج
+  const [hasBadge, setHasBadge] = useState(false); 
   
   const { address: connectedAddress, isConnected } = useAccount();
   const { generateAndVerify } = useZKProof();
@@ -24,7 +24,6 @@ export default function Home() {
     }
   }, [isConnected, connectedAddress]);
 
-  // دالة لفحص الرصيد في العقد الذكي
   const checkIfHasBadge = async () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum as any);
@@ -45,7 +44,6 @@ export default function Home() {
 
   setLoading(true);
   try {
-    // الرابط أصبح نسبياً الآن
     const res = await fetch(`/api/score/${connectedAddress}`);
     if (!res.ok) throw new Error('Server error');
     const data = await res.json();
@@ -129,7 +127,6 @@ export default function Home() {
           <div className={`relative bg-[#121212] border ${hasBadge ? 'border-yellow-500/50' : 'border-white/10'} p-10 rounded-[2.5rem] shadow-2xl transition-all duration-700`}>
             
             {hasBadge ? (
-              // عرض البادج في حال الملكية
               <div className="text-center py-6 animate-in zoom-in duration-500">
                 <div className="relative inline-block">
                     <img src="/badge.png" alt="ZK Badge" className="w-48 h-48 mx-auto drop-shadow-[0_0_30px_rgba(234,179,8,0.3)]" />
@@ -139,7 +136,6 @@ export default function Home() {
                 <p className="text-gray-500 font-mono text-xs mt-2">SOULBOUND TOKEN ID: #00{connectedAddress?.slice(-3)}</p>
               </div>
             ) : (
-              // عرض السكور العادي
               <>
                 <div className="flex justify-between mb-12">
                   <ShieldCheck size={40} className="text-blue-500" />
@@ -178,7 +174,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* زر الماينت */}
+         
           {scoreData && scoreData.score >= 25 && !hasBadge && (
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[80%]">
               <button 

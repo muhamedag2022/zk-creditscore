@@ -3,7 +3,6 @@ import hre from "hardhat";
 async function main() {
   console.log("--- Initializing Deployment ---");
   
-  // الوصول إلى viem عبر any لتجنب أخطاء التعريفات
   const hskViem = (hre as any).viem;
 
   if (!hskViem) {

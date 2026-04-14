@@ -6,7 +6,6 @@ template IsZero() {
 
     signal inv;
 
-    // حساب المعكوس بطريقة آمنة
     inv <-- in!=0 ? 1/in : 0;
 
     out <== -in*inv + 1;
