@@ -197,7 +197,30 @@ component main {public [address]} = ScoreCheck();
 | 60–79 | 🥈 Gold | Trusted Member | ✅ |
 | 40–59 | 🥉 Silver | Verified Member | ✅ |
 | 20–39 | 🟤 Bronze | Basic Member | ✅ |
-| 0–19 | ⚪ Unranked | — | ❌ |
+| 0–19 | ⚪️ Unranked | — | ❌ |
+
+---
+
+## ⛽ Gas Measurements (HashKey Testnet — On-chain Verified)
+
+> All values measured from live deployment transactions on HashKey Chain Testnet (Chain ID: 133).  
+> Verified via RPC — `eth_getTransactionReceipt`.
+
+### Contract Deployments
+
+| Contract | Gas Used | Transaction Hash | Block |
+| :--- | ---: | :--- | :--- |
+| **CreditScoreRegistry** | 957,050 | [`0x2f143d...d27b`](https://testnet-explorer.hsk.xyz/tx/0x2f143d2dd7ec8540261d00875e22a7454e37f85252aa0fef4fe653992122d27b) | 26,179,599 |
+| **CreditSBT** | 1,597,777 | [`0x85b487...f57`](https://testnet-explorer.hsk.xyz/tx/0x85b48795a91b79edb58932a091cb766a1a561f5eab1a056eaa31171c0f549d57) | 26,179,602 |
+| **CreditProofVerifier** | 784,102 | [`0x5c5f51...a77`](https://testnet-explorer.hsk.xyz/tx/0x5c5f517a2d3dae18db18565ffa51e176570842285d76fc15d18897deb7e47a77) | 26,179,605 |
+
+### Contract Bytecode Sizes (On-chain)
+
+| Contract | Deployed Bytecode |
+| :--- | ---: |
+| CreditScoreRegistry | 3,851 bytes |
+| CreditSBT | 6,780 bytes |
+| CreditProofVerifier | 3,159 bytes |
 
 ---
 
